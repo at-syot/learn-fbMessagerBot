@@ -6,8 +6,11 @@ const
 // read .env file.
 const dotenv = require('dotenv')
 dotenv.config()
-
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
+function handleMessage(sender_psid, received_message) {}
+function handlePostback(sender_psid, received_postback) {}
+function callSendAPI(sender_psid, res) {} 
 
 app.post('/webhook', (req, res) => {  
 
@@ -17,6 +20,7 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
+    console.log(body)
     body.entry.forEach(function(entry) {
 
       // Gets the message. entry.messaging is an array, but 
