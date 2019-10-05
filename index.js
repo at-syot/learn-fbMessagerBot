@@ -3,6 +3,12 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json())
 
+// read .env file.
+const dotenv = require('dotenv')
+dotenv.config()
+
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
 app.post('/webhook', (req, res) => {  
 
   let body = req.body;
@@ -31,7 +37,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
-  let VERIFY_TOKEN = "A_WH"
+  let VERIFY_TOKEN = process.env.VERIFY_TOKEN
     
   // Parse the query params
   let mode = req.query['hub.mode'];
