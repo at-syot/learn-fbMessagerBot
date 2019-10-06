@@ -54,7 +54,20 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, res)
 }
 
-function handlePostback(sender_psid, received_postback) {}
+function handlePostback(sender_psid, received_postback) {
+  let payload = received_postback.payload
+  callSendAPI(sender_psid, (function() {
+    if (payload == 'yes') {
+      return {
+        text: 'OK, this is the right photo.'
+      }
+    } else {
+      return { 
+        text: 'Ops! Try upload another one.'
+      }
+    }
+  })())
+}
 
 function callSendAPI(sender_psid, res) {
   let request_body = {
@@ -99,7 +112,7 @@ app.post('/webhook', (req, res) => {
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message)
       } else if (webhook_event.postback) {
-
+        handlePostback(sender_psid, webhook_event.postback)
       }
     });
 
