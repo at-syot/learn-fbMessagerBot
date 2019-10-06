@@ -3,33 +3,64 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json())
 
+const request = require('request')
+
 // read .env file.
 const dotenv = require('dotenv')
 dotenv.config()
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-function handleMessage(sender_psid, received_message) {}
+function handleMessage(sender_psid, received_message) {
+  let res
+  if (received_message.message) {
+    res = {
+      text: `You send this msg: ${received_message} back to the page!.`
+    }
+  }
+
+  callSendAPI(sender_psid, res)
+}
+
 function handlePostback(sender_psid, received_postback) {}
-function callSendAPI(sender_psid, res) {} 
+
+function callSendAPI(sender_psid, res) {
+  let request_body = {
+    recipient: {
+      id: sender_psid
+    },
+    message: res
+  }
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { "access_token": PAGE_ACCESS_TOKEN },
+    method: "POST",
+    json: request_body
+  }, (err, res, body) => {
+
+  })
+} 
 
 app.post('/webhook', (req, res) => {  
 
   console.log('webhook post got call.')
+
   let body = req.body;
 
   // Checks this is an event from a page subscription
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
-    console.log(body)
     body.entry.forEach(function(entry) {
 
       // Gets the message. entry.messaging is an array, but 
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
-      console.log('\n\n')
-      console.log('just msg: ')
-      console.log(webhook_event);
+      let sender_psid = webhook_event.sender.id
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message)
+      } else if (webhook_event.postback) {
+
+      }
     });
 
     // Returns a '200 OK' response to all requests
