@@ -12,6 +12,7 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 function handleMessage(sender_psid, received_message) {
   let res
+  console.log('received_message: ', received_message)
   if (received_message.message) {
     res = {
       "text": `You send this msg: ${received_message} back to the page!.`
