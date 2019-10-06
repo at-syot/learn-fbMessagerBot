@@ -19,6 +19,35 @@ function handleMessage(sender_psid, received_message) {
       text: `You send this msg: ${received_message.text} back to the page!.`
     }
   }
+
+  if (received_message.attachments) {
+    let attachment_url = received_message.attachments[0].payload.url
+    res = {
+      attachments: {
+        type: 'template',
+        payload: {
+          template_type: 'generic',
+          "elements": [{
+            "title": "Is this the right picture?",
+            "subtitle": "Tap a button to answer.",
+            "image_url": attachment_url,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Yes!",
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "No!",
+                "payload": "no",
+              }
+            ],
+          }]
+        }
+      }
+    }
+  }
   callSendAPI(sender_psid, res)
 }
 
