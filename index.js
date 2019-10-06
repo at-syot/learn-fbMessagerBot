@@ -14,10 +14,9 @@ function handleMessage(sender_psid, received_message) {
   let res
   if (received_message.text) {
     res = {
-      "text": `You send this msg: ${received_message.text} back to the page!.`
+      text: `You send this msg: ${received_message.text} back to the page!.`
     }
   }
-
   callSendAPI(sender_psid, res)
 }
 
@@ -25,10 +24,10 @@ function handlePostback(sender_psid, received_postback) {}
 
 function callSendAPI(sender_psid, res) {
   let request_body = {
-    "recipient": {
-      "id": sender_psid
+    recipient: {
+      id: sender_psid
     },
-    "message": res
+    message: res
   }
   console.log('request_body: ', request_body)
   request({
