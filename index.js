@@ -70,10 +70,6 @@ function callSendAPI(sender_psid, res) {
     method: "POST",
     json: request_body
   }, (err, res, body) => {
-    // console.log(res)
-    // console.log('\n')
-    // console.log(body)
-    console.log('\n')
     if (!err) {
       console.log('message sent!')
     } else {
@@ -98,6 +94,8 @@ app.post('/webhook', (req, res) => {
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       let sender_psid = webhook_event.sender.id
+      console.log('webhook event.')
+      console.log(webhook_event)
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message)
       } else if (webhook_event.postback) {
