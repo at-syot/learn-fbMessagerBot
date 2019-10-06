@@ -37,7 +37,7 @@ function callSendAPI(sender_psid, res) {
     method: "POST",
     json: request_body
   }, (err, res, body) => {
-    console.log(res)
+    // console.log(res)
     // console.log('\n')
     // console.log(body)
     console.log('\n')
