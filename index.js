@@ -11,6 +11,8 @@ dotenv.config()
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 function handleMessage(sender_psid, received_message) {
+  console.log('always log message.')
+  console.log(received_message)
   let res
   if (received_message.text) {
     res = {
