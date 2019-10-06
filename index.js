@@ -14,7 +14,7 @@ function handleMessage(sender_psid, received_message) {
   let res
   if (received_message.message) {
     res = {
-      text: `You send this msg: ${received_message} back to the page!.`
+      "text": `You send this msg: ${received_message} back to the page!.`
     }
   }
 
@@ -25,10 +25,10 @@ function handlePostback(sender_psid, received_postback) {}
 
 function callSendAPI(sender_psid, res) {
   let request_body = {
-    recipient: {
-      id: sender_psid
+    "recipient": {
+      "id": sender_psid
     },
-    message: res
+    "message": res
   }
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
