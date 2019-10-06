@@ -23,7 +23,7 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.attachments) {
     let attachment_url = received_message.attachments[0].payload.url
     res = {
-      attachments: {
+      attachment: {
         type: 'template',
         payload: {
           template_type: 'generic',
