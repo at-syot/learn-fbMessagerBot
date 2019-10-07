@@ -71,8 +71,6 @@ function handleMessage(sender_psid, received_message) {
     }
   }
 
-  console.log('res')
-  console.log(res)
   callSendAPI(sender_psid, res)
 }
 
@@ -97,6 +95,9 @@ function callSendAPI(sender_psid, res) {
     },
     message: res
   }
+
+  console.log('request_body')
+  console.log(request_body)
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { "access_token": PAGE_ACCESS_TOKEN },
