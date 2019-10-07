@@ -20,18 +20,18 @@ function handleMessage(sender_psid, received_message) {
     const text = received_message.text
     if (text == 'start') {
       res = {
-        "text": "Pick a color:",
+        "text": "Pick: income or expense ?",
         "quick_replies":[
           {
             "content_type":"text",
-            "title":"Red",
+            "title":"income",
             "payload": "",
             "image_url":"https://vast-cliffs-28332.herokuapp.com/images/income.png"
           },{
             "content_type":"text",
-            "title":"Green",
-            "payload":"<POSTBACK_PAYLOAD>",
-            "image_url":"http://example.com/img/green.png"
+            "title":"expense",
+            "payload":"",
+            "image_url":"https://vast-cliffs-28332.herokuapp.com/images/expense.png"
           }
         ]
       }
