@@ -26,7 +26,7 @@ function handleMessage(sender_psid, received_message) {
             "content_type":"text",
             "title":"Red",
             "payload": "",
-            "image_url":"https://www.iconfinder.com/icons/3668841/earnings_income_salary_wallet_icon"
+            "image_url":"https://vast-cliffs-28332.herokuapp.com/images/income.png"
           },{
             "content_type":"text",
             "title":"Green",
